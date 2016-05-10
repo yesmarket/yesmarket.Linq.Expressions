@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>yesmarket.Linq.Expressions</id>
+    <version>1.0.0</version>
+    <authors>Ryan Bartsch</authors>
+    <owners>yesmarket</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Utility for comparing LINQ Expressions</description>
+    <tags>ExpressionEqualityComparer</tags>
+  </metadata>
+</package>
