@@ -4,7 +4,7 @@ using yesmarket.Linq.Expressions.Support;
 
 namespace yesmarket.Linq.Expressions
 {
-    public sealed class ExpressionEqualityComparer : IEqualityComparer<Expression>
+    public class ExpressionEqualityComparer : IEqualityComparer<Expression>
     {
         public bool Equals(Expression x, Expression y)
         {
