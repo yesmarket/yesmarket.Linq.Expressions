@@ -51,130 +51,127 @@ namespace yesmarket.Linq.Expressions
         protected override Expression VisitBinary(BinaryExpression node)
         {
             var other = (BinaryExpression)_current;
-            var eq =
-                node.IsEqualTo(other, _ => _.Method) &&
-                node.IsEqualTo(other, _ => _.IsLifted) &&
-                node.IsEqualTo(other, _ => _.IsLiftedToNull);
-            return eq.IfTrue(() => base.VisitBinary(node));
+            _eq &= node.IsEqualTo(other, _ => _.Method, _ => _.IsLifted, _ => _.IsLiftedToNull);
+            return _eq ? base.VisitBinary(node) : node;
         }
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
             var other = (ConstantExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Value);
-            return eq.IfTrue(() => base.VisitConstant(node));
+            _eq &= node.IsEqualTo(other, _ => _.Value);
+            return _eq ? base.VisitConstant(node) : node;
         }
 
         protected override Expression VisitDebugInfo(DebugInfoExpression node)
         {
             var other = (DebugInfoExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.IsClear, _ => _.EndColumn, _ => _.EndLine, _ => _.StartLine, _ => _.StartColumn);
-            return eq.IfTrue(() => base.VisitDebugInfo(node));
+            _eq &= node.IsEqualTo(other, _ => _.IsClear, _ => _.EndColumn, _ => _.EndLine, _ => _.StartLine, _ => _.StartColumn);
+            return _eq ? base.VisitDebugInfo(node) : node;
         }
 
         protected override Expression VisitDynamic(DynamicExpression node)
         {
             var other = (DynamicExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.DelegateType, _ => _.Binder);
-            return eq.IfTrue(() => base.VisitDynamic(node));
+            _eq &= node.IsEqualTo(other, _ => _.DelegateType, _ => _.Binder);
+            return _eq ? base.VisitDynamic(node) : node;
         }
 
         protected override Expression VisitGoto(GotoExpression node)
         {
             var other = (GotoExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Kind, _ => _.Target);
-            return eq.IfTrue(() => base.VisitGoto(node));
+            _eq &= node.IsEqualTo(other, _ => _.Kind, _ => _.Target);
+            return _eq ? base.VisitGoto(node) : node;
         }
 
         protected override Expression VisitIndex(IndexExpression node)
         {
             var other = (IndexExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Indexer);
-            return eq.IfTrue(() => base.VisitIndex(node));
+            _eq &= node.IsEqualTo(other, _ => _.Indexer);
+            return _eq ? base.VisitIndex(node) : node;
         }
 
         protected override Expression VisitLabel(LabelExpression node)
         {
             var other = (LabelExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Target);
-            return eq.IfTrue(() => base.VisitLabel(node));
+            _eq &= node.IsEqualTo(other, _ => _.Target);
+            return _eq ? base.VisitLabel(node) : node;
         }
 
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
             var other = (LambdaExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Name, _ => _.TailCall);
-            return eq.IfTrue(() => base.VisitLambda(node));
+            _eq &= node.IsEqualTo(other, _ => _.Name, _ => _.TailCall);
+            return _eq ? base.VisitLambda(node) : node;
         }
 
         protected override Expression VisitListInit(ListInitExpression node)
         {
             var other = (ListInitExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Initializers);
-            return eq.IfTrue(() => base.VisitListInit(node));
+            _eq &= node.IsEqualTo(other, _ => _.Initializers);
+            return _eq ? base.VisitListInit(node) : node;
         }
 
         protected override Expression VisitLoop(LoopExpression node)
         {
             var other = (LoopExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.BreakLabel, _ => _.ContinueLabel);
-            return eq.IfTrue(() => base.VisitLoop(node));
+            _eq &= node.IsEqualTo(other, _ => _.BreakLabel, _ => _.ContinueLabel);
+            return _eq ? base.VisitLoop(node) : node;
         }
 
         protected override Expression VisitMember(MemberExpression node)
         {
             var other = (MemberExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Member);
-            return eq.IfTrue(() => base.VisitMember(node));
+            _eq &= node.IsEqualTo(other, _ => _.Member);
+            return _eq ? base.VisitMember(node) : node;
         }
 
         protected override Expression VisitMemberInit(MemberInitExpression node)
         {
             var other = (MemberInitExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Bindings);
-            return eq.IfTrue(() => base.VisitMemberInit(node));
+            _eq &= node.IsEqualTo(other, _ => _.Bindings);
+            return _eq ? base.VisitMemberInit(node) : node;
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
             var other = (MethodCallExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Method);
-            return eq.IfTrue(() => base.VisitMethodCall(node));
+            _eq &= node.IsEqualTo(other, _ => _.Method);
+            return _eq ? base.VisitMethodCall(node) : node;
         }
 
         protected override Expression VisitNew(NewExpression node)
         {
             var other = (NewExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Constructor, _ => _.Members);
-            return eq.IfTrue(() => base.VisitNew(node));
+            _eq &= node.IsEqualTo(other, _ => _.Constructor, _ => _.Members);
+            return _eq ? base.VisitNew(node) : node;
         }
 
         protected override Expression VisitSwitch(SwitchExpression node)
         {
             var other = (SwitchExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Comparison);
-            return eq.IfTrue(() => base.VisitSwitch(node));
+            _eq &= node.IsEqualTo(other, _ => _.Comparison);
+            return _eq ? base.VisitSwitch(node) : node;
         }
 
         protected override Expression VisitTry(TryExpression node)
         {
             var other = (TryExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Handlers);
-            return eq.IfTrue(() => base.VisitTry(node));
+            _eq &= node.IsEqualTo(other, _ => _.Handlers);
+            return _eq ? base.VisitTry(node) : node;
         }
 
         protected override Expression VisitTypeBinary(TypeBinaryExpression node)
         {
             var other = (TypeBinaryExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.TypeOperand);
-            return eq.IfTrue(() => base.VisitTypeBinary(node));
+            _eq &= node.IsEqualTo(other, _ => _.TypeOperand);
+            return _eq ? base.VisitTypeBinary(node) : node;
         }
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
             var other = (UnaryExpression)_current;
-            var eq = node.IsEqualTo(other, _ => _.Method, _ => _.IsLifted, _ => _.IsLiftedToNull);
-            return eq.IfTrue(() => base.VisitUnary(node));
+            _eq &= node.IsEqualTo(other, _ => _.Method, _ => _.IsLifted, _ => _.IsLiftedToNull);
+            return _eq ? base.VisitUnary(node) : node;
         }
     }
 }

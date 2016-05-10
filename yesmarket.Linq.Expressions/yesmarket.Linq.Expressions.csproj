@@ -50,7 +50,6 @@
     <Compile Include="ExpressionEqualityComparer.cs" />
     <Compile Include="ExpressionHashCodeResolver.cs" />
     <Compile Include="ExpressionValueComparer.cs" />
-    <Compile Include="Extensions.Boolean.cs" />
     <Compile Include="Extensions.Expression.cs" />
     <Compile Include="IExpressionCollection.cs" />
     <Compile Include="IHashCodeResolver.cs" />
