@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace yesmarket.Linq.Expressions
+namespace yesmarket.Linq.Expressions.Support.Extensions
 {
     internal static class ExpressionExtensions
     {

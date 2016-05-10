@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
+using yesmarket.Linq.Expressions.Support.Extensions;
 
-namespace yesmarket.Linq.Expressions
+namespace yesmarket.Linq.Expressions.Support
 {
     internal sealed class ExpressionHashCodeResolver : ExpressionVisitor, IHashCodeResolver<Expression>
     {
@@ -25,6 +26,12 @@ namespace yesmarket.Linq.Expressions
             return base.VisitBinary(node);
         }
 
+        protected override CatchBlock VisitCatchBlock(CatchBlock node)
+        {
+            _runningTotal += node.GetHashCodeFor(node.Test);
+            return base.VisitCatchBlock(node);
+        }
+
         protected override Expression VisitConstant(ConstantExpression node)
         {
             _runningTotal += node.GetHashCodeFor(node.Value);
@@ -33,7 +40,7 @@ namespace yesmarket.Linq.Expressions
 
         protected override Expression VisitDebugInfo(DebugInfoExpression node)
         {
-            _runningTotal += node.GetHashCodeFor(node.IsClear, node.EndColumn, node.EndLine, node.StartLine, node.StartColumn);
+            _runningTotal += node.GetHashCodeFor(node.Document, node.EndColumn, node.EndLine, node.IsClear, node.StartLine, node.StartColumn);
             return base.VisitDebugInfo(node);
         }
 
@@ -41,6 +48,12 @@ namespace yesmarket.Linq.Expressions
         {
             _runningTotal += node.GetHashCodeFor(node.DelegateType, node.Binder);
             return base.VisitDynamic(node);
+        }
+
+        protected override ElementInit VisitElementInit(ElementInit node)
+        {
+            _runningTotal += node.GetHashCodeFor(node.AddMethod);
+            return base.VisitElementInit(node);
         }
 
         protected override Expression VisitGoto(GotoExpression node)
@@ -55,10 +68,10 @@ namespace yesmarket.Linq.Expressions
             return base.VisitIndex(node);
         }
 
-        protected override Expression VisitLabel(LabelExpression node)
+        protected override LabelTarget VisitLabelTarget(LabelTarget node)
         {
-            _runningTotal += node.GetHashCodeFor(node.Target);
-            return base.VisitLabel(node);
+            _runningTotal += node.GetHashCodeFor(node.Name, node.Type);
+            return base.VisitLabelTarget(node);
         }
 
         protected override Expression VisitLambda<T>(Expression<T> node)
@@ -85,10 +98,10 @@ namespace yesmarket.Linq.Expressions
             return base.VisitMember(node);
         }
 
-        protected override Expression VisitMemberInit(MemberInitExpression node)
+        protected override MemberBinding VisitMemberBinding(MemberBinding node)
         {
-            _runningTotal += node.GetHashCodeFor(node.Bindings);
-            return base.VisitMemberInit(node);
+            _runningTotal += node.GetHashCodeFor(node.BindingType, node.Member);
+            return base.VisitMemberBinding(node);
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
@@ -101,6 +114,12 @@ namespace yesmarket.Linq.Expressions
         {
             _runningTotal += node.GetHashCodeFor(node.Constructor, node.Members);
             return base.VisitNew(node);
+        }
+
+        protected override Expression VisitParameter(ParameterExpression node)
+        {
+            _runningTotal += node.GetHashCodeFor(node.IsByRef);
+            return base.VisitParameter(node);
         }
 
         protected override Expression VisitSwitch(SwitchExpression node)

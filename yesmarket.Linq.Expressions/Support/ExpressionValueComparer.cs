@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using yesmarket.Linq.Expressions.Support.Extensions;
 
-namespace yesmarket.Linq.Expressions
+namespace yesmarket.Linq.Expressions.Support
 {
     internal sealed class ExpressionValueComparer : ExpressionVisitor, IValueComparer<Expression>
     {
@@ -65,7 +66,7 @@ namespace yesmarket.Linq.Expressions
         protected override Expression VisitDebugInfo(DebugInfoExpression node)
         {
             var other = (DebugInfoExpression)_current;
-            _eq &= node.IsEqualTo(other, _ => _.IsClear, _ => _.EndColumn, _ => _.EndLine, _ => _.StartLine, _ => _.StartColumn);
+            _eq &= node.IsEqualTo(other, _ => _.EndColumn, _ => _.EndLine, _ => _.IsClear, _ => _.StartLine, _ => _.StartColumn);
             return _eq ? base.VisitDebugInfo(node) : node;
         }
 

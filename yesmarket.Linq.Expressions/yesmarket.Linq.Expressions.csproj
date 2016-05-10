@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>yesmarket.Linq.Expressions</RootNamespace>
     <AssemblyName>yesmarket.Linq.Expressions</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,22 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpressionCollection.cs" />
     <Compile Include="ExpressionEqualityComparer.cs" />
-    <Compile Include="ExpressionHashCodeResolver.cs" />
-    <Compile Include="ExpressionValueComparer.cs" />
-    <Compile Include="Extensions.Expression.cs" />
-    <Compile Include="IExpressionCollection.cs" />
-    <Compile Include="IHashCodeResolver.cs" />
-    <Compile Include="IValueComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\ExpressionCollection.cs" />
+    <Compile Include="Support\ExpressionHashCodeResolver.cs" />
+    <Compile Include="Support\ExpressionValueComparer.cs" />
+    <Compile Include="Support\Extensions\Extensions.Expression.cs" />
+    <Compile Include="Support\IExpressionCollection.cs" />
+    <Compile Include="Support\IHashCodeResolver.cs" />
+    <Compile Include="Support\IValueComparer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="yesmarket.Linq.Expressions.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Support\Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

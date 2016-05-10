@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace yesmarket.Linq.Expressions
+namespace yesmarket.Linq.Expressions.Support
 {
     internal sealed class ExpressionCollection : ExpressionVisitor, IExpressionCollection
     {

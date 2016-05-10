@@ -1,4 +1,4 @@
-namespace yesmarket.Linq.Expressions
+namespace yesmarket.Linq.Expressions.Support
 {
     internal interface IHashCodeResolver<in T>
     {
