@@ -41,10 +41,11 @@ namespace yesmarket.Linq.Expressions.Tests
         [Fact]
         public void Equals_Same3_AreEqual()
         {
-            Expression<Func<Order, bool>> x = order => order.Customer == new Customer { Name = "john" };
-            Expression<Func<Order, bool>> y = order => order.Customer == new Customer { Name = "john" };
+            var customer = new Customer { Name = "john" };
+            Expression<Func<Order, bool>> x = order => order.Customer == customer;
+            Expression<Func<Order, bool>> y = order => order.Customer == customer;
             var e = _sut.Equals(x, y);
-            e.ShouldBeFalse();
+            e.ShouldBeTrue();
         }
 
         [Fact]
